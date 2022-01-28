@@ -1,13 +1,13 @@
 package timer;
 
 public class TimeBoundedTimer implements Timer {
-	
+
 	private Timer timer2bound;
 	private Integer startTime;
 	private Integer stopTime;
-	
-	private Integer next=0;
-	private int time=0;
+
+	private Integer next = 0;
+	private int time = 0;
 	private boolean hasNext;
 
 	public TimeBoundedTimer(Timer timer2bound, int startTime, int stopTime) {
@@ -23,15 +23,15 @@ public class TimeBoundedTimer implements Timer {
 		this.stopTime = Integer.MAX_VALUE;
 		this.init();
 	}
-	
+
 	private void init() {
 		this.next = this.timer2bound.next();
 		while (this.next < this.startTime) {
 			this.next += this.timer2bound.next();
 		}
-		if(this.next<this.stopTime) {
+		if (this.next < this.stopTime) {
 			this.hasNext = true;
-		}else {
+		} else {
 			this.hasNext = false;
 		}
 	}
@@ -44,12 +44,12 @@ public class TimeBoundedTimer implements Timer {
 	@Override
 	public Integer next() {
 		Integer next = this.next;
-		this.time+=this.next;
-		if(this.time < this.stopTime) {
+		this.time += this.next;
+		if (this.time < this.stopTime) {
 			this.next = this.timer2bound.next();
-		}else {
+		} else {
 			next = null;
-			this.hasNext=false;
+			this.hasNext = false;
 		}
 		return next;
 	}

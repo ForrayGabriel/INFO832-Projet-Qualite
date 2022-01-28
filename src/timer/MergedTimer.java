@@ -1,7 +1,7 @@
 package timer;
 
-public class MergedTimer implements Timer{
-	
+public class MergedTimer implements Timer {
+
 	private Timer timer1;
 	private Timer timer2;
 
@@ -9,6 +9,7 @@ public class MergedTimer implements Timer{
 		this.timer1 = timer1;
 		this.timer2 = timer2;
 	}
+
 	@Override
 	public boolean hasNext() {
 		return (this.timer1.hasNext() && this.timer2.hasNext());
@@ -16,7 +17,7 @@ public class MergedTimer implements Timer{
 
 	@Override
 	public Integer next() {
-		if(this.hasNext()) {
+		if (this.hasNext()) {
 			return this.timer1.next() + this.timer2.next();
 		}
 		return null;

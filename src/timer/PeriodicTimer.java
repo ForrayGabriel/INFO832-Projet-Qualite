@@ -1,11 +1,19 @@
 package timer;
 
+/**
+ * A PeriodicTimer is a Timer that give a value at a defined interval
+ * The first period can be delayed
+ */
 public class PeriodicTimer implements Timer {
 
 	private int period;
 	private int next;
 	private RandomTimer moreOrLess = null;
 	
+	/**
+	 * Create a PeriodicTimer, of which the first period start immediately 
+	 * @param at The length of a period
+	 */
 	public PeriodicTimer(int at) {
 		this.period = at;
 		this.next = at;
@@ -24,6 +32,11 @@ public class PeriodicTimer implements Timer {
 		this.next = at + (int)(this.moreOrLess.next() - this.moreOrLess.getMean());
 	}
 	
+	/**
+	 * Create a PeriodicTimer, of which the first period start after a defined time
+	 * @param period The length of a period  
+	 * @param at The delay before the start of the timer
+	 */
 	public PeriodicTimer(int period, int at) {
 		this.period = period;
 		this.next = at;
@@ -43,6 +56,10 @@ public class PeriodicTimer implements Timer {
 		this.next = at + (int)(this.moreOrLess.next() - this.moreOrLess.getMean());
 	}
 	
+	/**
+	 * Getter of the period
+	 * @return The period of the timer
+	 */
 	public int getPeriod() {
 		return this.period;
 	}

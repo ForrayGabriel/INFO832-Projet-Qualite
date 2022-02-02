@@ -4,11 +4,21 @@ import java.util.Iterator;
 import java.util.TreeSet;
 import java.util.Vector;
 
+/**
+ * A DateTimer is a type of Timer that give times based on a list of dates
+ * The times are the difference between two dates
+ * This Timer is useful when replaying an event with recorded dates
+ *
+ */
 public class DateTimer  implements Timer {
 	
 	Vector<Integer> lapsTimes;
 	Iterator<Integer> it;
 	
+	/**
+	 * Constructor of a DateTimer with a list of date
+	 * @param dates A list of dates to take the intervals from
+	 */
 	public DateTimer(TreeSet<Integer> dates) {
 		this.lapsTimes = new Vector<Integer>();
 		Integer last;
@@ -24,6 +34,10 @@ public class DateTimer  implements Timer {
 
 	}
 	
+	/**
+	 * Constructor of a DateTimer with a list of predefined intervals
+	 * @param lapsTimes A list of intervals
+	 */
 	public DateTimer(Vector<Integer> lapsTimes) {
 		this.lapsTimes = new Vector<Integer>(lapsTimes);
 		this.it = this.lapsTimes.iterator();

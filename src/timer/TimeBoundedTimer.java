@@ -1,5 +1,9 @@
 package timer;
 
+/**
+ * Class that create a timer based on an other timer,
+ *  but that gives values only between two specified times
+ */
 public class TimeBoundedTimer implements Timer {
 	
 	private Timer timer2bound;
@@ -10,6 +14,12 @@ public class TimeBoundedTimer implements Timer {
 	private int time=0;
 	private boolean hasNext;
 
+	/**
+	 * Constructor of a bounded timer with start and stop times
+	 * @param timer2bound Original timer that give the times
+	 * @param startTime Time after which every returned time will be
+	 * @param stopTime Time before which every returned time will be
+	 */
 	public TimeBoundedTimer(Timer timer2bound, int startTime, int stopTime) {
 		this.timer2bound = timer2bound;
 		this.startTime = startTime;
@@ -17,6 +27,11 @@ public class TimeBoundedTimer implements Timer {
 		this.init();
 	}
 
+	/**
+	 * Constructor of a bounded timer with only a start time
+	 * @param timer2bound Original timer that give the times
+	 * @param startTime Time after which every returned time will be
+	 */
 	public TimeBoundedTimer(Timer timer2bound, int startTime) {
 		this.timer2bound = timer2bound;
 		this.startTime = startTime;

@@ -5,11 +5,10 @@ import java.util.Vector;
 
 /**
  * @author Flavien Vernier
- *
+ * A RandomTimer is a Timer that give random timings.  
+ * The timings can be generated from multiple random laws.
+ * The laws can be Exponential, Poisson, Gaussian or Posibilist
  */
-
-
-
 public class RandomTimer implements Timer {
 	
 	public static enum randomDistribution {
@@ -35,7 +34,9 @@ public class RandomTimer implements Timer {
 	}
 	
 	/**
-	 * @param param constraint 
+	 * Constructor of a RandomTimer for an Exponential or Poisson law
+	 * @param distribution The type of random distribution
+	 * @param Parameter of the distribution
 	 * @throws Exception 
 	 */
 	public RandomTimer(randomDistribution distribution, double param) throws Exception{
@@ -55,8 +56,12 @@ public class RandomTimer implements Timer {
 			throw new Exception("Bad Timer constructor for selected distribution");
 		}
 	}
+	
 	/**
-	 * @param min/max constraint
+	 * Constructor of a RandomTimer for a Posibilist or Gaussian law
+	 * @param distribution The type of random distribution
+	 * @param lolim The lower limit
+	 * @param hilim The higher limit
 	 * @throws Exception 
 	 */
 	public RandomTimer(randomDistribution distribution, int lolim, int hilim) throws Exception{
@@ -71,10 +76,18 @@ public class RandomTimer implements Timer {
 		}
 	}
 	
+	/**
+	 * Getter for the distribution
+	 * @return the type of distribution
+	 */
 	public String getDistribution(){
 		return this.distribution.name();
 	}
 	
+	/**
+	 * Getter for the distribution's parameters 
+	 * @return the parameters of the distribution as a string composed of the type of parameter with its value
+	 */
 	public String getDistributionParam() {
 		if(distribution == randomDistribution.EXP ){
 			return "rate: " + this.rate;
@@ -87,6 +100,10 @@ public class RandomTimer implements Timer {
 		return "null";
 	}
 	
+	/**
+	 * Getter of the mean
+	 * @return The mean
+	 */
 	public double getMean(){
 		return this.mean;
 	}
@@ -143,25 +160,31 @@ public class RandomTimer implements Timer {
 	}*/
 	
 	/**
+	 * Function to get the next time using a Posibilist law
 	 * Give good mean
-	 * Give wrong variance  
+	 * Give wrong variance
+	 * @return The next time 
 	 */
 	private int nextTimePosibilist(){
 	    return (int)this.lolim + (int)(this.r.nextDouble() * (this.hilim - this.lolim));
 	}
 	
 	/**
+	 * Function to get the next time using a Exponential law
 	 * Give good mean
-	 * Give wrong variance  
+	 * Give wrong variance
+	 * @return The next time 
 	 */
 	private int nextTimeExp(){
 	    return (int)(-Math.log(1.0 - this.r.nextDouble()) / this.rate);
 	}
 	
-	
+
 	/**
+	 * Function to get the next time using a Poisson law
 	 * Give good mean
 	 * Give good variance
+	 * @return The next time
 	 */
 	private int nextTimePoisson() {
 	    
@@ -175,7 +198,10 @@ public class RandomTimer implements Timer {
 	    return k - 1;
 	}   		
 	    
-	
+	/**
+	 * Function to get the next time using a Gaussian law
+	 * @return The next time
+	 */
 	private int nextTimeGaussian(){
 		return (int)this.lolim + (int)((this.r.nextGaussian() + 1.0)/2.0 * (this.hilim - this.lolim));
 	}

@@ -7,11 +7,17 @@ import java.util.logging.Handler;
 import java.util.logging.LogRecord;
 
 /**
+ * Class that is used to format the message of the logger
  * @author Flavien Vernier
- *
+ * 
  */
 public class LogFormatter  extends Formatter {
 	
+	/**
+	 * Format the message from a log record
+	 * @param rec The record to be formatted
+	 * @return The formatted string
+	 */
 	public String format(LogRecord rec) {
 		StringBuffer buf = new StringBuffer();
 		

@@ -135,8 +135,8 @@ public class DiscreteActionDependent implements DiscreteActionInterface {
 	}
 
 	/**
-	 * Getter of the current methode
-	 * @return The current methode
+	 * Getter of the current method
+	 * @return The current method
 	 */
 	public Method getMethod() {
 		return this.currentAction.getMethod();

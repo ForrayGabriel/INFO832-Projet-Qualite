@@ -13,7 +13,7 @@ import action.DiscreteAction;
 import action.DiscreteActionInterface;
 
 
-/**
+/** The complete simulator
  * @author Tiphaine Bulou (2016)
  * @author Flavien Vernier
  *
@@ -35,6 +35,9 @@ public class DiscreteActionSimulator implements Runnable {
 	private FileHandler logFile; 
 	private ConsoleHandler logConsole; 
 
+	/**
+	 * Constructor of a simulator
+	 */
 	public DiscreteActionSimulator(){
 		
 		// Start logger
@@ -73,6 +76,10 @@ public class DiscreteActionSimulator implements Runnable {
 		}
 	}
 	
+	/**
+	 * Add an action to the simulator
+	 * @param c The action to be added
+	 */
 	public void addAction(DiscreteActionInterface c){
 
 		if(c.hasNext()) {
@@ -133,6 +140,10 @@ public class DiscreteActionSimulator implements Runnable {
 		return sleepTime;
 	}
 
+	/**
+	 * Update the time of the clock 
+	 * @param runningTimeOf1stCapsul Time quantity to be incremented
+	 */
 	private void updateTimes(int runningTimeOf1stCapsul){
 		
 		// update time laps off all actions
@@ -173,6 +184,9 @@ public class DiscreteActionSimulator implements Runnable {
 	}
 
 
+	/**
+	 * Function executed when the thread is started
+	 */
 	public void run() {
 		int count = this.nbLoop;
 		boolean finished = false;
@@ -213,11 +227,17 @@ public class DiscreteActionSimulator implements Runnable {
 		}
 	}
 
+	/**
+	 * Launch the thread
+	 */
 	public void start(){
 		this.running = true;
 		this.t.start();
 	}
 
+	/**
+	 * Stop the thread
+	 */
 	public void stop(){
 		System.out.println("STOP THREAD " + t.getName() + "obj " + this);
 		this.running = false;
@@ -232,6 +252,10 @@ public class DiscreteActionSimulator implements Runnable {
 		return toS.toString();
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public boolean getRunning() {
 		return this.running;
 	}

@@ -3,7 +3,8 @@ package action;
 import java.lang.reflect.Method;
 import java.util.Iterator;
 
-/*
+/**
+ * The interface that define the characteristics that all action must have
  * TODO must implement Iterator<Action>
  */
 public interface DiscreteActionInterface extends Comparable<DiscreteActionInterface>, Iterator<DiscreteActionInterface>{

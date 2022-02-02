@@ -14,7 +14,8 @@ import timer.Timer;
 /**
  * @author Tiphaine Bulou (2016)
  * @author Flavien Vernier
- *
+ * 
+ * <p> Class that implement the discrete action interface and is the base for any action
  */
 
 // TODO must inherit from Action
@@ -32,6 +33,9 @@ public class DiscreteAction implements DiscreteActionInterface {
 
 	// Constructor
 	
+	/**
+	 * Constructor of an empty discrete action
+	 */
 	private DiscreteAction() {
 		// Start logger
 			this.logger = Logger.getLogger("DAS");
@@ -53,6 +57,12 @@ public class DiscreteAction implements DiscreteActionInterface {
 			this.logger.addHandler(logConsole);*/
 	}
 	
+	/**
+	 * Constructor of a discrete action with parameters
+	 * @param o The object on which the actions are performed
+	 * @param m The method that is applied to the object
+	 * @param timmer A timer that give time between actions
+	 */
 	public DiscreteAction(Object o, String m, Timer timmer){
 		this();
 		this.object = o;
@@ -68,6 +78,10 @@ public class DiscreteAction implements DiscreteActionInterface {
 	
 	// ATTRIBUTION
 
+	/**
+	 * Function that spend a specified amount of time
+	 * @param t The time that is spent
+	 */
 	public void spendTime(int t) {
 		Integer old = this.lapsTime;
 		if(this.lapsTime != null) {
@@ -79,12 +93,24 @@ public class DiscreteAction implements DiscreteActionInterface {
 
 	// RECUPERATION
 
+	/**
+	 * Getter of the associated method
+	 * @return The associated method
+	 */
 	public Method getMethod(){
 		return method;
 	}
+	/**
+	 * Getter of the current laps of time
+	 * @return The current laps of time
+	 */
 	public Integer getCurrentLapsTime(){
 		return lapsTime;
 	}
+	/**
+	 * Getter of the associated object
+	 * @return The associated object
+	 */
 	public Object getObject(){
 		return object;
 	}
@@ -92,6 +118,11 @@ public class DiscreteAction implements DiscreteActionInterface {
 
 
 	// COMPARAISON
+	/**
+	 * Function that compare this action with an other one by the time before execution to ordonate their execution
+	 * @param c The other action to compare to
+	 * @return a negative integer, zero, or a positive integer as this objectis less than, equal to, or greater than the specified object.
+	 */
 	public int compareTo(DiscreteActionInterface c) {
 		if (this.lapsTime == null) { // no lapstime is equivalent to infinity 
 			return 1;
@@ -116,6 +147,9 @@ public class DiscreteAction implements DiscreteActionInterface {
 
 	}
 
+	/**
+	 * @see java.util.Iterator#next()
+	 */
 	public DiscreteActionInterface next() {
 		Integer old = this.lapsTime;
 		this.lapsTime = this.timmer.next();
@@ -124,6 +158,9 @@ public class DiscreteAction implements DiscreteActionInterface {
 		return this;
 	}
 
+	/**
+	 * @return If their is a next time on the timer
+	 */
 	public boolean hasNext() {
 		Boolean more=false;
 		if (this.timmer != null && this.timmer.hasNext()) {

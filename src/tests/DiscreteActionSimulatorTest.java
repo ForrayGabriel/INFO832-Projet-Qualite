@@ -69,22 +69,22 @@ class DiscreteActionSimulatorTest {
 	}
 	
 	 @Test
-	    public void startTest() {
-	        DiscreteActionSimulator discrAct = new DiscreteActionSimulator();
-	        discrAct.start();
+	 void DAS1() {
+        DiscreteActionSimulator discrAct = new DiscreteActionSimulator();
+        discrAct.start();
 
-	        // testing normal behavior
-	        assertTrue(discrAct.getRunning());
+        // testing normal behavior
+        assertTrue(discrAct.getRunning());
 	 }
 	 
 	 @Test
-	    public void stopTest() {
-	        DiscreteActionSimulator discrAct = new DiscreteActionSimulator();
-	        discrAct.start();
-	        discrAct.stop();
+	 void stopTest() {
+        DiscreteActionSimulator discrAct = new DiscreteActionSimulator();
+        discrAct.start();
+        discrAct.stop();
 
-	        // testing normal behavior
-	        assertFalse(discrAct.getRunning());
+        // testing normal behavior
+        assertFalse(discrAct.getRunning());
 	 }
 
 	

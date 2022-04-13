@@ -1,4 +1,4 @@
-package timer;
+package tests;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -9,6 +9,8 @@ import java.util.Vector;
 import org.junit.Assert;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+
+import timer.DateTimer;
 
 class DateTimerTest {
 	static private Vector<Integer> vec1;

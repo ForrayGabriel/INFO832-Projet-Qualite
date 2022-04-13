@@ -1,4 +1,4 @@
-package timer;
+package tests;
 import java.util.Random;
 
 import static org.junit.Assert.*;
@@ -6,6 +6,9 @@ import static org.junit.Assert.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import timer.PeriodicTimer;
+import timer.RandomTimer;
 
 public class PeriodicTimerTest2 {
 	private RandomTimer mol ;

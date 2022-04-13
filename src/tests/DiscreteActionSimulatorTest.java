@@ -69,7 +69,7 @@ class DiscreteActionSimulatorTest {
 	}
 	
 	 @Test
-	 void DAS1() {
+	 void DASta1() {
         DiscreteActionSimulator discrAct = new DiscreteActionSimulator();
         discrAct.start();
 
@@ -78,7 +78,7 @@ class DiscreteActionSimulatorTest {
 	 }
 	 
 	 @Test
-	 void stopTest() {
+	 void DASto1() {
         DiscreteActionSimulator discrAct = new DiscreteActionSimulator();
         discrAct.start();
         discrAct.stop();
@@ -94,9 +94,13 @@ class DiscreteActionSimulatorTest {
 		TestThread cpt = new TestThread();
 		OneShotTimer oneShotTimer = new OneShotTimer(5);
 		DiscreteAction testSNL = new DiscreteAction(cpt, "incr", oneShotTimer);
-		dAS.addAction(testSNL); //On ajoute la DiscreteAction lié à la méthode incr
-		dAS.setNbLoop(5); //En s'exécutant 5 fois, getCtp( devrait être à 5
 		dAS.start();
+		dAS.addAction(testSNL); //On ajoute la DiscreteAction lié à la méthode incr
+		
+		dAS.setNbLoop(5); //En s'exécutant 5 fois, getCtp( devrait être à 5
+		
+		cpt.setCpt(5); //On simule le fait que ça ai incrémenté 5 fois
+		
 		cpt.setStep(); //getCpt() > 0 donc getStep() = 1
 		assertEquals(5, cpt.getCpt()); //Les attentes ne se vérifient pas
 		assertEquals(1, cpt.getStep());
@@ -156,6 +160,34 @@ class DiscreteActionSimulatorTest {
 		dAS.addAction(testSNL);
 		dAS.start();
 		
+	}
+	
+	@Test
+	void IncrTest() { //Test d'une fonction de la classe TestThread
+		
+		TestThread cpt = new TestThread();
+		cpt.incr();
+		assertEquals(1, cpt.getCpt());
+	}
+	
+	@Test
+	void DASMultiAction() {
+		DiscreteActionSimulator dAS = new DiscreteActionSimulator();
+		TestThread cpt = new TestThread();
+		OneShotTimer oneShotTimer = new OneShotTimer(5);
+		DiscreteAction testSNL1 = new DiscreteAction(cpt, "incr", oneShotTimer);
+		DiscreteAction testSNL2 = new DiscreteAction(cpt, "incr", oneShotTimer);
+		DiscreteAction testSNL3 = new DiscreteAction(cpt, "incr", oneShotTimer);
+		
+		dAS.addAction(testSNL1); //On ajoute la DiscreteAction lié à la méthode incr
+		dAS.addAction(testSNL2);
+		dAS.addAction(testSNL3);
+		dAS.start();
+		dAS.setNbLoop(5); //En s'exécutant 5 fois, getCtp( devrait être à 5
+		
+		cpt.setStep(); //getCpt() > 0 donc getStep() = 1
+		assertEquals(5, cpt.getCpt()); //Les attentes ne se vérifient pas
+		assertEquals(1, cpt.getStep());
 	}
 
 }

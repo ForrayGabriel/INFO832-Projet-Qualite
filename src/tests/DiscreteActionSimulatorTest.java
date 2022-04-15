@@ -20,8 +20,6 @@ class TestThread {
 	
 	private int cpt;
 	private int step;
-	
-	
 
 	public TestThread() {
 		super();

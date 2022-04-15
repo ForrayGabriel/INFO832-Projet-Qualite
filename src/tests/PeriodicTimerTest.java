@@ -1,4 +1,4 @@
-package timer;
+package tests;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -8,6 +8,8 @@ import org.junit.Assert;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import timer.PeriodicTimer;
+import timer.RandomTimer;
 import timer.RandomTimer.randomDistribution;
 
 class PeriodicTimerTest {
@@ -43,8 +45,8 @@ class PeriodicTimerTest {
 
 	@Test
 	void testperiodictimerforint() throws IllegalArgumentException, IllegalAccessException {
-		Assert.assertEquals(2,reflexionFields[1].get(periodicTimer1));
-		Assert.assertEquals(2,reflexionFields[0].get(periodicTimer1));	
+		assertEquals(2,reflexionFields[1].get(periodicTimer1));
+		assertEquals(2,reflexionFields[0].get(periodicTimer1));	
 	}
     @Test
     void testPeriodTimerformoreorless() throws IllegalArgumentException, IllegalAccessException {

@@ -17,6 +17,7 @@ import discreteBehaviorSimulator.DiscreteActionSimulator;
 import timer.DateTimer;
 import timer.OneShotTimer;
 import timer.PeriodicTimer;
+import timer.TimeBoundedTimer;
 import timer.Timer;
 
 /**
@@ -54,6 +55,7 @@ class DiscreteActionSimulatorTest {
 
 	@BeforeEach
 	private void setUp() {	
+	// Before each tests, we create an reflexionFields to get the private DiscreteActionSimulator attributes
 		DiscreteActionSimulator dAS = new DiscreteActionSimulator();
 		Class<?> reflexionDAS = dAS.getClass();
 		reflexionFields = reflexionDAS.getDeclaredFields();
@@ -64,32 +66,30 @@ class DiscreteActionSimulatorTest {
 		
 	}
 	
-	 @Test
-	 void DASta1() {
-		
+	@Test
+	void DASta1() {
+	// Test of the start function
 		DiscreteActionSimulator dAS = new DiscreteActionSimulator();
         dAS.start();
 
-        // testing normal behavior
         assertTrue(dAS.getRunning());
 
 	 }
 	 
-	 @Test
-	 void DASto1() {
-		
-        DiscreteActionSimulator dAS = new DiscreteActionSimulator();
+	@Test
+	void DASto1() {
+	// Test of the stop function	
+		DiscreteActionSimulator dAS = new DiscreteActionSimulator();
         dAS.start();
         dAS.stop();
 
-        // testing normal behavior
         assertFalse(dAS.getRunning());
        
 	 }
-	 
-	 @Test
-		void DASnlt1() {
-			
+
+	@Test
+	void DASnlt1() {
+	// Test of nextLapsTime() by calling DiscreteAction.getCurrentLapsTime()
 			DiscreteActionSimulator dAS = new DiscreteActionSimulator();
 			TestThread cpt = new TestThread();
 			OneShotTimer oneShotTimer = new OneShotTimer(5);
@@ -101,38 +101,38 @@ class DiscreteActionSimulatorTest {
 			
 		}
 	 
-	 @Test
-		void DASnlt2() {
-			
+	@Test
+	void DASnlt2() {
+	// Test of nextLapsTime() with none action added	
 			DiscreteActionSimulator dAS = new DiscreteActionSimulator();
 			TestThread cpt = new TestThread();
 			OneShotTimer oneShotTimer = new OneShotTimer(5);
 			DiscreteAction testSNL = new DiscreteAction(cpt, "incr", oneShotTimer);
 			dAS.start();
 			
-			assertEquals(null, testSNL.getCurrentLapsTime());
+			assertNull(testSNL.getCurrentLapsTime());
 			
 		}
 
 	
 	@Test
 	void DASsnl1() throws IllegalArgumentException, IllegalAccessException {
-		
+	// Test of setNbLoop(), if nbLoop = 5, step should be 1
 		DiscreteActionSimulator dAS = new DiscreteActionSimulator();
 		OneShotTimer oneShotTimer = new OneShotTimer(5);
 		DiscreteAction testSNL = new DiscreteAction(reflexionFields[0], "incr", oneShotTimer);
 		dAS.start();
-		dAS.addAction(testSNL); //On ajoute la DiscreteAction li� � la m�thode incr
-		dAS.setNbLoop(5); //En s'ex�cutant 5 fois, getCtp( devrait �tre � 5
+		dAS.addAction(testSNL);
+		dAS.setNbLoop(5);
 
-		assertEquals(5, reflexionFields[4].get(dAS)); //Les attentes ne se v�rifient pas
+		assertEquals(5, reflexionFields[4].get(dAS));
 		assertEquals(1, reflexionFields[5].get(dAS));
 
 	}
 	
 	@Test
 	void DASsnl2() throws IllegalArgumentException, IllegalAccessException {
-		
+	// Test of setNbLoop(), if nbLoop = 0, step should be -1
 		DiscreteActionSimulator dAS = new DiscreteActionSimulator();
 		OneShotTimer oneShotTimer = new OneShotTimer(5);
 		DiscreteAction testSNL = new DiscreteAction(reflexionFields[0], "incr", oneShotTimer);
@@ -147,7 +147,7 @@ class DiscreteActionSimulatorTest {
 	
 	@Test
 	void DASsnl3() throws IllegalArgumentException, IllegalAccessException {
-		
+	// Test of setNbLoop(), if nbLoop = -5, it should create an error
 		DiscreteActionSimulator dAS = new DiscreteActionSimulator();
 		OneShotTimer oneShotTimer = new OneShotTimer(5);
 		DiscreteAction testSNL = new DiscreteAction(reflexionFields[0], "incr", oneShotTimer);
@@ -162,65 +162,31 @@ class DiscreteActionSimulatorTest {
 	
 	@Test
 	void DASaa1() throws IllegalArgumentException, IllegalAccessException {
-		
+	// Test of actionAction() by adding an action to the simulator
 		DiscreteActionSimulator dAS = new DiscreteActionSimulator();
 		OneShotTimer oneShotTimer = new OneShotTimer(5);
 		DiscreteAction testSNL = new DiscreteAction(reflexionFields[0], "incr", oneShotTimer);
-		
 		dAS.addAction(testSNL);
+		
 		assertEquals(testSNL, ((Vector) reflexionFields[3].get(dAS)).firstElement());
 
 	}
 	
 	@Test
 	void DASaa2() throws IllegalArgumentException, IllegalAccessException {
-		
+		// Test of actionAction() by not adding an action to the simulator
 		DiscreteActionSimulator dAS = new DiscreteActionSimulator();
 		OneShotTimer oneShotTimer = new OneShotTimer(5);
 		DiscreteAction testSNL = new DiscreteAction(reflexionFields[0], "incr", oneShotTimer);
-		dAS.addAction(testSNL);
-		assertEquals(testSNL, ((Vector) reflexionFields[3].get(dAS)).firstElement());
-	}
-	
-	
-	@Test
-	void DASMultiAction() throws IllegalArgumentException, IllegalAccessException {
 		
-		
-		DiscreteActionSimulator dAS = new DiscreteActionSimulator();
-		OneShotTimer oneShotTimer = new OneShotTimer(5);
-		DiscreteAction testSNL1 = new DiscreteAction(reflexionFields[0], "incr", oneShotTimer);
-		DiscreteAction testSNL2 = new DiscreteAction(reflexionFields[0], "incr", oneShotTimer);
-		DiscreteAction testSNL3 = new DiscreteAction(reflexionFields[0], "incr", oneShotTimer);
-		
-		dAS.addAction(testSNL1); //On ajoute la DiscreteAction li� � la m�thode incr
-		dAS.addAction(testSNL2);
-		dAS.addAction(testSNL3);
-		dAS.start();
-		dAS.setNbLoop(5); //En s'ex�cutant 5 fois, getCtp( devrait �tre � 5
-		
-		assertEquals(5, reflexionFields[4].get(dAS)); //Les attentes ne se v�rifient pas
-		assertEquals(1, reflexionFields[5].get(dAS));
-		dAS.setNbLoop(-5);
-		//assertEquals(0, dAS.nbLoop); //N�cessite l'impl�mentation de getters
-		//assertEquals(-1, dAS.step); //N�cessite l'impl�mentation de getters
+		assertThrows(Exception.class, () -> {
+			((Vector) reflexionFields[3].get(dAS)).firstElement();
+		});
 	}
 	
 	@Test
-    public void toStringTest() {
-        DiscreteActionSimulator dAS = new DiscreteActionSimulator();
-        assertTrue(dAS.toString() instanceof String);
-    }
-	
-	@Test
-	void DASra1() {
-		DiscreteActionSimulator dAS = new DiscreteActionSimulator();
-		dAS.start();
-		
-	}
-	
-	@Test
-	void DASra2() {
+	void DAStt1() {
+	//Test to not adding the DiscreteAction
 		DiscreteActionSimulator dAS = new DiscreteActionSimulator();
 		TestThread cpt = new TestThread();
 		OneShotTimer oneShotTimer = new OneShotTimer(5);
@@ -228,46 +194,16 @@ class DiscreteActionSimulatorTest {
 		dAS.setNbLoop(5);
 		dAS.start();
 		
-		assertEquals(cpt.getCpt(), 0);
+		assertEquals(cpt.getCpt(), 0); //Should be equals 5
 		
 	}
 	
 	@Test
-	void DASra3() throws IllegalArgumentException, IllegalAccessException {
-		
-		DiscreteActionSimulator dAS = new DiscreteActionSimulator();
-		OneShotTimer oneShotTimer = new OneShotTimer(5);
-		DiscreteAction testSNL = new DiscreteAction(reflexionFields[0], "incr", oneShotTimer);
-		dAS.addAction(testSNL);
-		DiscreteActionInterface currentAction = (DiscreteActionInterface) ((Vector) reflexionFields[3].get(dAS)).firstElement();
-		dAS.start();
-		assertFalse(currentAction.hasNext());
-		
-	}
-	
-	@Test
-	void DASra4() throws IllegalArgumentException, IllegalAccessException {
-		
-		DiscreteActionSimulator dAS = new DiscreteActionSimulator();
-		OneShotTimer oneShotTimer = new OneShotTimer(5);
-		DiscreteAction testSNL1 = new DiscreteAction(reflexionFields[0], "incr", oneShotTimer);
-		DiscreteAction testSNL2 = new DiscreteAction(reflexionFields[0], "incr", oneShotTimer);
-		DiscreteAction testSNL3 = new DiscreteAction(reflexionFields[0], "incr", oneShotTimer);
-		dAS.addAction(testSNL1);
-		dAS.addAction(testSNL2);
-		dAS.addAction(testSNL3);
-		
-		assertTrue(reflexionFields[2].get(dAS) != null);
-		
-	}
-	
-	@Test
-	 void TestIncr() {
-		
+	void TestIncr() {
+	// Test of the incrementation of the TestThreadClass
 		TestThread testThread = new TestThread();
 		testThread.incr();
 
-		// testing normal behavior
 		assertEquals(1, testThread.getCpt());
 
 	 }

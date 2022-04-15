@@ -16,61 +16,87 @@ class ClockTest {
 	void setUp() {
 		clock = Clock.getInstance();
 	}
-	
-	@Test
-	// numero 40
-	void testTrue() {
-		assertTrue(true);
-		
-	}
 
 	@Test 
-	// numero 35
-	void testGetInstance() {
+	void Cgi1() {
 		Clock result = Clock.getInstance();
 		Clock expected = clock;
 		assertEquals(expected, result);
 	}
 	
 	@Test
-	// numero 38
-	void testIsVirtual() {
+	void Civ1() {
 		clock.setVirtual(true);
 		Boolean expected = true;
 		Boolean result = clock.isVirtual();
 		assertEquals(expected, result);
 	}
+	
+	@Test
+	void Civ2() {
+		clock.setVirtual(false);
+		Boolean expected = false;
+		Boolean result = clock.isVirtual();
+		assertEquals(expected, result);
+	}
 
 	@Test
-	// numero 39
-	void testSetVirtual() {
+	void Csv1() {
+		clock.setVirtual(true);
+		assertEquals(clock.isVirtual(),true);
+	}
+	
+	@Test
+	void Csv2() {
 		clock.setVirtual(false);
 		assertEquals(clock.isVirtual(),false);
 	}
 	
 	@Test
-	// numero 40
-	void testSetNextJump() {
+	void Csnj1() {
 		try {
-			clock.setNextJump(nextJ);
-			
+			clock.setNextJump(0);
 		}
 		catch(Exception e) {
 			fail("there is a exception : " + e);
 		}
 		assertTrue(true);
-		
+	}
+	
+	@Test
+	void Csnj2() {
+		try {
+			clock.setNextJump(-1);
+		}
+		catch(Exception e) {
+			fail("there is a exception : " + e);
+		}
+		assertTrue(true);
+	}
+	
+	@Test
+	void Csnj3() {
+		try {
+			clock.setNextJump(999999);
+		}
+		catch(Exception e) {
+			fail("there is a exception : " + e);
+		}
+		assertTrue(true);
 	}
 
 	@Test
-	// numero 43
-	void testGetTime() {
+	void Cgt1() {
 		clock.setVirtual(true);
 		long result = clock.getTime();
 		long expected = 0;
 		assertEquals(expected, result);
+		
+
+	}
 	
-	// numero 44
+	@Test
+	void Cgt2() {
 		clock.setVirtual(false);
 		long result2 = clock.getTime();
 		long expected2 = new Date().getTime();
@@ -79,8 +105,7 @@ class ClockTest {
 	}
 
 	@Test
-	// numero 45 et 46
-	void testUnlockReadAccess() {		
+	void Cura1() {		
 		try {
 			clock.unlockReadAccess();	
 		}
@@ -92,8 +117,7 @@ class ClockTest {
 
 
 	@Test
-	// numero 47
-	void testToString() {
+	void Cts1() {
 		String expected = "0";
 		String result = clock.toString();
 		assertEquals(expected, result);

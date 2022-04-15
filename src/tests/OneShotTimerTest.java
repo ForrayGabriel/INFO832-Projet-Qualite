@@ -30,20 +30,20 @@ class OneShotTimerTest {
 
 	@Test
 	void ts5() throws IllegalArgumentException, IllegalAccessException {
-		Assert.assertEquals(true, oneShotTimer.hasNext());
-		Assert.assertEquals(at1, reflexionFields[0].get(oneShotTimer));
+		assertEquals(true, oneShotTimer.hasNext());
+		assertEquals(at1, reflexionFields[0].get(oneShotTimer));
 	}
 	
 	@Test
 	void ts6() throws IllegalArgumentException, IllegalAccessException {
-		Assert.assertEquals(true, oneShotTimer.hasNext());
+		assertEquals(true, oneShotTimer.hasNext());
 	}
 	
 	@Test
 	void ts7() throws IllegalArgumentException, IllegalAccessException {
 		Integer d = oneShotTimer.next();
-		Assert.assertEquals(at1, d);
-		Assert.assertEquals(false, oneShotTimer.hasNext());
-		Assert.assertEquals(null, reflexionFields[0].get(oneShotTimer));
+		assertEquals(at1, d);
+		assertEquals(false, oneShotTimer.hasNext());
+		assertEquals(null, reflexionFields[0].get(oneShotTimer));
 	}
 }

@@ -29,7 +29,6 @@ import timer.Timer;
 class TestThread {
 	
 	private int cpt; // Represent nbLoop
-	private int step; // Represent step
 
 	public TestThread() {
 		super();
@@ -43,23 +42,6 @@ class TestThread {
 	public int getCpt() {
 		return cpt;
 	}
-
-	public void setCpt(int cpt) {
-		this.cpt = cpt;
-	}
-	
-	public int getStep() {
-		return step;
-	}
-
-	public void setStep() {
-		if(this.cpt>0){
-			this.step = 1;
-		}else{ // running infinitely
-			this.step = -1;
-		}
-	}
-
 	
 	
 	
@@ -278,6 +260,17 @@ class DiscreteActionSimulatorTest {
 		assertTrue(reflexionFields[2].get(dAS) != null);
 		
 	}
+	
+	@Test
+	 void TestIncr() {
+		
+		TestThread testThread = new TestThread();
+		testThread.incr();
+
+		// testing normal behavior
+		assertEquals(1, testThread.getCpt());
+
+	 }
 	
 	
 	

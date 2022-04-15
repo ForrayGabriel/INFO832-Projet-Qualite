@@ -1,58 +1,125 @@
 package tests;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.Random;
 
-import java.lang.reflect.Field;
+import static org.junit.Assert.*;
 
-import org.junit.Assert;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
-import timer.PeriodicTimer;
-import timer.RandomTimer;
-import timer.RandomTimer.randomDistribution;
+public class PeriodicTimerTest2 {
+	private RandomTimer mol ;
+	private PeriodicTimer ptI;
+	private PeriodicTimer ptIE;
+	private PeriodicTimer ptIP;
+	private PeriodicTimer ptIPOS;
+	private PeriodicTimer ptIG;
+	private PeriodicTimer ptII;
+	private PeriodicTimer ptIIE;
+	private PeriodicTimer ptIIP;
+	private PeriodicTimer ptIIPOS;
+	private PeriodicTimer ptIIG;
+	private RandomTimer timer;
+	private RandomTimer POISSON ;
+	private RandomTimer EXP ;
+	private RandomTimer POSIBILIST ;
+	private RandomTimer GAUSSIAN ;
+	
+	
 
-class PeriodicTimerTest {
-	private static int period1;
-	private static int at;
-	private static RandomTimer moreOrLess1 = null;
-	private static PeriodicTimer periodicTimer1;
-	private static PeriodicTimer periodicTimer2;
-	private static PeriodicTimer periodicTimer3;
-	private static Field[] reflexionFields;
-	private static Field[] reflexionFields1;
-	@SuppressWarnings("deprecation")
-	@BeforeAll
-	static void setUpBeforeClass() throws Exception {
-		period1 = 1;
-		at = 1;
-		moreOrLess1 = new RandomTimer(randomDistribution.EXP,1);
-		periodicTimer1 = new PeriodicTimer(2);
-		periodicTimer2 = new PeriodicTimer(at,moreOrLess1);
-		Class<?> reflexionPeriodicTimer = periodicTimer1.getClass();
-		reflexionFields = reflexionPeriodicTimer.getDeclaredFields();
-     
-		for (Field field: reflexionFields) {
-			field.setAccessible(true);
-		}
-		Class<?> reflexionPeriodicTimer1 = periodicTimer2.getClass();
-		reflexionFields1 = reflexionPeriodicTimer1.getDeclaredFields();
-     
-		for (Field field: reflexionFields1) {
-			field.setAccessible(true);
-		}
+	@Before
+	public void setUp() throws Exception {
+		 
+		 POISSON = new RandomTimer(timer.string2Distribution("exp"), 1.1);
+		 EXP = new RandomTimer(timer.string2Distribution("exp"), 2.2);
+		 POSIBILIST = new RandomTimer(timer.string2Distribution("exp"), 3);
+		 GAUSSIAN = new RandomTimer(timer.string2Distribution("exp"), 2.1);
+		 
+		 ptI = new PeriodicTimer(1);
+		 
+		 ptIE=new PeriodicTimer(1,EXP);
+		 ptIP=new PeriodicTimer(1,POISSON);
+		 ptIPOS=new PeriodicTimer(1,POSIBILIST);
+		 ptIG=new PeriodicTimer(1,GAUSSIAN);
+		 
+		 ptII= new PeriodicTimer(1,2);
+		 
+		 ptIIE=new PeriodicTimer(1,2,EXP);
+		 ptIIP=new PeriodicTimer(1,3,POISSON);
+		 ptIIPOS=new PeriodicTimer(1,3,POSIBILIST);
+		 ptIIG=new PeriodicTimer(1,2,GAUSSIAN);
+		
+
+		
+	}
+
+	@After
+	public void tearDown() throws Exception {
 	}
 
 	@Test
-	void testperiodictimerforint() throws IllegalArgumentException, IllegalAccessException {
-		assertEquals(2,reflexionFields[1].get(periodicTimer1));
-		assertEquals(2,reflexionFields[0].get(periodicTimer1));	
+	public void ts8() {
+		assertEquals(ptI.getPeriod(), 1);
+		
+				}
+
+	@Test
+	public void ts9() {
+		assertEquals(ptIE.getPeriod(),1);
+		assertEquals(ptIP.getPeriod(),1);
+		assertEquals(ptIPOS.getPeriod(),1);
+		assertEquals(ptIG.getPeriod(),1);
 	}
-    @Test
-    void testPeriodTimerformoreorless() throws IllegalArgumentException, IllegalAccessException {
-    	int period = (int) reflexionFields[0].get(periodicTimer2);
-    	RandomTimer moreorless = (RandomTimer) reflexionFields[2].get(periodicTimer2);
-    	int next = (int) reflexionFields[1].get(periodicTimer2);
-    	System.out.println(period);
-    }
+
+	@Test
+	public void ts10() {
+		assertEquals(ptII.getPeriod(),1);
+	}
+
+	@Test
+	public void ts11() {
+		assertEquals(ptIIE.getPeriod(),1);
+		assertEquals(ptIIP.getPeriod(),1);
+		assertEquals(ptIIPOS.getPeriod(),1);
+		assertEquals(ptIIG.getPeriod(),1);
+	}
+	@Test
+	public void ts12() {
+		assertEquals(ptI.getPeriod(),1);
+		assertEquals(ptIE.getPeriod(),1);
+		assertEquals(ptIP.getPeriod(),1);
+		assertEquals(ptIPOS.getPeriod(),1);
+		assertEquals(ptIG.getPeriod(),1);
+		assertEquals(ptII.getPeriod(),1);
+		assertEquals(ptIIE.getPeriod(),1);
+		assertEquals(ptIIP.getPeriod(),1);
+		assertEquals(ptIIPOS.getPeriod(),1);
+		assertEquals(ptIIG.getPeriod(),1);
+		
+		
+	}
+
+	@Test
+	public void ts13() {
+		assertTrue(ptI.next() == 1);
+		assertTrue(ptIP.next() == 1);
+		
+	}
+
+	@Test
+	public void ts14() {
+		assertTrue(ptI.hasNext());
+		assertTrue(ptIE.hasNext());
+		assertTrue(ptIP.hasNext());
+		assertTrue(ptIPOS.hasNext());
+		assertTrue(ptIG.hasNext());
+		assertTrue(ptII.hasNext());
+		assertTrue(ptIIE.hasNext());
+		assertTrue(ptIIP.hasNext());
+		assertTrue(ptIIPOS.hasNext());
+		assertTrue(ptIIG.hasNext());
+		
+	}
+
 }

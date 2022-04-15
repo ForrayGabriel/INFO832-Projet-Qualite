@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import junit.framework.Assert;
+import timer.RandomTimer;
 import timer.RandomTimer.randomDistribution;
 
 class RandomTimerTest {

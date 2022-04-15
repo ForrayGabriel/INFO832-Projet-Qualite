@@ -8,7 +8,10 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class PeriodicTimerTest2 {
+import timer.PeriodicTimer;
+import timer.RandomTimer;
+
+public class PeriodicTimerTest {
 	private RandomTimer mol ;
 	private PeriodicTimer ptI;
 	private PeriodicTimer ptIE;

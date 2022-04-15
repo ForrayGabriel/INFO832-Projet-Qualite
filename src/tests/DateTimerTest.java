@@ -37,23 +37,23 @@ class DateTimerTest {
 	@Test
 	void testDateTimerTreeSetOfInteger() {
 		int t = datetime2.it.next();
-		Assert.assertEquals(1,t);
+		assertEquals(1,t);
 	}
 
 	@Test
 	void testDateTimerVectorOfInteger() {
-		Assert.assertEquals(vec1, this.datetime1.lapsTimes);
+		assertEquals(vec1, this.datetime1.lapsTimes);
 	}
 
 	@Test
 	void testHasNext() {
-		Assert.assertEquals(true, DateTimerTest.datetime1.hasNext());
+		assertTrue(DateTimerTest.datetime1.hasNext());
 	}
 
 	@Test
 	void testNext() {
 		int value = DateTimerTest.datetime1.next();
-		Assert.assertEquals(7, value);
+		assertEquals(7, value);
 	}
 
 }

@@ -12,8 +12,8 @@ import java.util.Vector;
  */
 public class DateTimer  implements Timer {
 	
-	Vector<Integer> lapsTimes;
-	Iterator<Integer> it;
+	public Vector<Integer> lapsTimes;
+	public Iterator<Integer> it;
 	
 	/**
 	 * Constructor of a DateTimer with a list of date

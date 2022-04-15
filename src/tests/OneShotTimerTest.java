@@ -31,18 +31,18 @@ class OneShotTimerTest {
 	@Test
 	void testOneShotTimerforint() throws IllegalArgumentException, IllegalAccessException {
 		
-		Assert.assertEquals(true, oneShotTimer.hasNext());
-		Assert.assertEquals(at1, reflexionFields[0].get(oneShotTimer));
+		assertTrue(oneShotTimer.hasNext());
+		assertEquals(at1, reflexionFields[0].get(oneShotTimer));
 	}
 	@Test
 	void testhasNext() throws IllegalArgumentException, IllegalAccessException {
-		Assert.assertEquals(true, oneShotTimer.hasNext());
+		assertTrue(oneShotTimer.hasNext());
 	}
 	@Test
 	void testnext() throws IllegalArgumentException, IllegalAccessException {
 		Integer d = oneShotTimer.next();
-		Assert.assertEquals(at1, d);
-		Assert.assertEquals(false, oneShotTimer.hasNext());
-		Assert.assertEquals(null, reflexionFields[0].get(oneShotTimer));
+		assertEquals(at1, d);
+		assertFalse(oneShotTimer.hasNext());
+		assertNull(reflexionFields[0].get(oneShotTimer));
 	}
 }

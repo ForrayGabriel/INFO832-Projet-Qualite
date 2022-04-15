@@ -10,8 +10,6 @@ import org.junit.Assert;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import timer.DateTimer;
-
 class DateTimerTest {
 	static private Vector<Integer> vec1;
 	static private DateTimer datetime1;
@@ -35,25 +33,25 @@ class DateTimerTest {
 
 
 	@Test
-	void testDateTimerTreeSetOfInteger() {
+	void ts1() {
 		int t = datetime2.it.next();
-		assertEquals(1,t);
+		Assert.assertEquals(1,t);
 	}
 
 	@Test
-	void testDateTimerVectorOfInteger() {
-		assertEquals(vec1, this.datetime1.lapsTimes);
+	void ts2() {
+		Assert.assertEquals(vec1, this.datetime1.lapsTimes);
 	}
 
 	@Test
-	void testHasNext() {
-		assertTrue(DateTimerTest.datetime1.hasNext());
+	void ts3() {
+		Assert.assertEquals(true, DateTimerTest.datetime1.hasNext());
 	}
 
 	@Test
-	void testNext() {
+	void ts4() {
 		int value = DateTimerTest.datetime1.next();
-		assertEquals(7, value);
+		Assert.assertEquals(7, value);
 	}
 
 }

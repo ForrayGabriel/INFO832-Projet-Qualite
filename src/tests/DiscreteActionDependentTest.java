@@ -6,7 +6,9 @@ import java.util.TreeSet;
 
 import org.junit.jupiter.api.Test;
 
-import discretebehavior.Clock;
+import action.DiscreteActionInterface;
+import action.DiscreteActionOnOffDependent;
+import discreteBehaviorSimulator.Clock;
 import timer.DateTimer;
 import timer.OneShotTimer;
 import timer.Timer;

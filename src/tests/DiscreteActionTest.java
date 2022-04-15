@@ -10,7 +10,8 @@ import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import discretebehavior.Clock;
+import action.DiscreteAction;
+import discreteBehaviorSimulator.Clock;
 import junit.framework.Assert;
 import timer.OneShotTimer;
 import timer.Timer;
